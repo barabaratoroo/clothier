@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { supabaseAdmin } from '@/lib/supabase/admin'
 import { createProduct } from '../actions'
+import BrandSelect from '@/components/admin/BrandSelect'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,10 +24,7 @@ export default async function NewProduct() {
         <Field label="商品名 *"><input name="name" required className={inputCls} /></Field>
         <div className="grid grid-cols-2 gap-4">
           <Field label="ブランド">
-            <select name="brand_id" className={inputCls}>
-              <option value="">未選択</option>
-              {(brands ?? []).map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
-            </select>
+            <BrandSelect brands={brands ?? []} />
           </Field>
           <Field label="カテゴリ">
             <select name="category_id" className={inputCls}>

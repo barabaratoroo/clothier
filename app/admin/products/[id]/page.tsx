@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { supabaseAdmin } from '@/lib/supabase/admin'
 import ImageUploader from '@/components/admin/ImageUploader'
 import { updateProduct, addVariant, updateVariantStock, deleteVariant, deleteImage } from './actions'
+import BrandSelect from '@/components/admin/BrandSelect'
 
 export const dynamic = 'force-dynamic'
 const inputCls = 'mt-1 w-full border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-900'
@@ -27,10 +28,7 @@ export default async function EditProduct({ params }: { params: Promise<{ id: st
           <input name="name" defaultValue={product.name} className={inputCls} /></label>
         <div className="grid grid-cols-2 gap-4">
           <label className="block"><span className="text-[11px] tracking-widest text-neutral-500">ブランド</span>
-            <select name="brand_id" defaultValue={product.brand_id ?? ''} className={inputCls}>
-              <option value="">未選択</option>
-              {(brands ?? []).map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
-            </select></label>
+            <BrandSelect brands={brands ?? []} defaultValue={product.brand_id ?? ''} /></label>
           <label className="block"><span className="text-[11px] tracking-widest text-neutral-500">カテゴリ</span>
             <select name="category_id" defaultValue={product.category_id ?? ''} className={inputCls}>
               <option value="">未選択</option>
